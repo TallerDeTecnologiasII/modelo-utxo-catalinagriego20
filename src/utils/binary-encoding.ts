@@ -53,7 +53,7 @@ export function encodeTransaction(transaction: Transaction): Buffer {
   function encodeString(str: string): Buffer {
     const strBuffer = Buffer.from(str, 'utf8');
     
-    //Excepción si la longitud de la cadena demasiado larga
+    // Excepción si la longitud de la cadena demasiado larga
     if (strBuffer.length > 255) {
       throw new Error(`String too long for encoding: ${str.length} bytes`);
     }

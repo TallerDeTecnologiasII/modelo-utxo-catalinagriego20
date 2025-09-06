@@ -26,15 +26,15 @@ export class TransactionValidator {
     
     for (const input of transaction.inputs) {
       const utxoKey = `${input.utxoId.txId}:${input.utxoId.outputIndex}`;
-      
-      //Verificar doble existencia
+
+      // Verificar doble existencia usando el set
       if (usedUTXOs.has(utxoKey)) {
         errors.push(createValidationError(VALIDATION_ERRORS.DOUBLE_SPENDING,`UTXO ${utxoKey} usado múltiples veces`));
         continue;
       }
       usedUTXOs.add(utxoKey);
-    
-      //Verificar existencia en el pool
+
+      // Verificar existencia en el pool
       const utxo = this.utxoPool.getUTXO(input.utxoId.txId, input.utxoId.outputIndex);
 
       if (!utxo) {
